@@ -5,8 +5,7 @@ export const app = express();
 
 app.get("/getAllUsers", (_, response) => {
   admin
-    .auth()
-    .listUsers()
+    .auth().listUsers()
     .then((users) => {
       response.json(users);
     })
@@ -17,9 +16,9 @@ app.get("/getAllUsers", (_, response) => {
 });
 
 app.post("/product", async (request, response) => {
+
   await admin.firestore().collection("Products").add(request.body);
   response.sendStatus(200);
-  response.end();
 });
 
 app.get("/product/:productName", async (request, response) => {
